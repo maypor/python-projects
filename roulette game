@@ -1,0 +1,95 @@
+#The program generates a roulette game
+# and records the results of the game at each round in a file
+
+import random
+
+
+def main():
+    print('welcome to the game')
+    roulette()
+
+
+def roulette():
+    initial_amount = input('Please enter the initial amount of money to bet: ')
+    while not number_validation_check(initial_amount):
+        initial_amount = input('Please enter the initial amount of money to bet: ')
+    roulette_file = open('roulette_file.txt', 'w')
+    roulette_file.write('initial amount: \n')
+    roulette_file.write(initial_amount + '\n')
+    initial_amount = int(initial_amount)
+    to_continue = bool(True)
+    count_round = 0
+    while to_continue:
+        # round
+        count_round += 1
+        print('round number ', count_round)
+        bet_amount = input('What amount would you like to bet?')
+        while not number_validation_check(bet_amount):
+            bet_amount = input('What amount would you like to bet?')
+        bet_amount = int(bet_amount)
+        number_bet = input('please choose a number between 1 to 36:')
+        while not number_bet_check(number_bet):
+            number_bet = input('please choose a number between 1 to 36:')
+        number_bet = int(number_bet)
+        outcome = random.randint(1, 36)
+        print('The roulette stopped on a number: ', outcome)
+        if outcome == number_bet:
+            initial_amount += bet_amount
+            print('you win!, the number is: ', outcome, 'your new amount is: ', initial_amount)
+        else:
+            initial_amount -= bet_amount
+            print('you lose', '\n', 'your new amount is: ', initial_amount, '\n')
+        documentation(bet_amount, outcome, number_bet, count_round, initial_amount)
+        whether_to_continue
+    roulette_file.close()
+    print_result()
+
+
+def documentation(bet_sum, outcome, number_bet, count_round, initial_amount):
+    roulette_file = open('roulette_file.txt', 'a')
+    roulette_file.write('round number ' + f'{count_round}' + '\n')
+    roulette_file.write('Invested sum ' + f'{bet_sum}' + '\n')
+    roulette_file.write('chose the number: ' + f'{number_bet}' + '\n')
+    roulette_file.write('outcome: ' + f'{outcome}' + '\n')
+    roulette_file.write('now you have ' + f'{initial_amount}' + 'shekels' + '\n')
+    roulette_file.close()
+
+
+def print_result():
+    roulette_file = open('roulette_file.txt', 'r')
+    line = roulette_file.readline()
+    while line != '':
+        print(line)
+        line = roulette_file.readline()
+    roulette_file.close()
+
+
+def whether_to_continue():
+    to_continue = input('do you want to play another round? enter yes or not')
+    if to_continue.upper() == 'YES':
+        return bool(True)
+    elif to_continue == 'NOT':
+        return bool(False)
+    else:
+        print('not valid word, please enter only yes/not')
+        exit()
+
+
+def number_validation_check(initial_amount):
+    if not initial_amount.isnumeric() or int(initial_amount) < 1:
+        print('not valid number, please enter digit only')
+        return bool(False)
+    else:
+        return bool(True)
+
+
+def number_bet_check(number):
+
+    if not number.isnumeric() or 37 < int(number) > 0:
+        print('not valid number, please enter digit only')
+        return bool(False)
+    else:
+        return bool(True)
+
+
+main()
