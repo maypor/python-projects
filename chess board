@@ -1,0 +1,36 @@
+import turtle
+
+turtle.penup()
+turtle.hideturtle()
+turtle.speed(0)
+turtle.goto(300, -300)
+turtle.right(180)
+
+for z in range(4):
+    turtle.pendown()
+    for i in range(4):
+        turtle.begin_fill()
+        for j in range(4):
+            turtle.forward(75)
+            turtle.right(90)
+        turtle.end_fill()
+        turtle.forward(150)
+        for j in range(4):
+            turtle.right(90)
+            turtle.forward(75)
+
+    turtle.right(90)
+    turtle.forward(150)
+    turtle.right(90)
+
+    for i in range(4):
+        turtle.begin_fill()
+        for j in range(4):
+            turtle.forward(75)
+            turtle.right(90)
+        turtle.end_fill()
+        turtle.forward(150)
+        for j in range(4):
+            turtle.right(90)
+            turtle.forward(75)
+    turtle.right(180)
