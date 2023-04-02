@@ -1,0 +1,60 @@
+# this program display first 10 moves in game 4 in a row
+import turtle
+
+screen = turtle.Screen()
+screen.setup(780, 670)
+screen.title("Connect 4 - Home Work No.2")
+turtle.speed(0)
+turtle.hideturtle()
+turtle.pensize(2)
+turtle.bgcolor('#88D8DA')
+
+START_X = -330
+START_Y = 230
+RADIUS = 50
+SPACE = 10
+
+turtle.fillcolor('white')
+for count_rows in range(7):
+    for count_cols in range(6):
+        turtle.penup()
+        turtle.goto(START_X, START_Y)
+        turtle.pendown()
+        turtle.begin_fill()
+        turtle.circle(RADIUS)
+        turtle.end_fill()
+        START_Y -= (RADIUS * 2 + SPACE)
+    START_X += (RADIUS * 2 + SPACE)
+    START_Y = 230
+
+START_X = -330
+START_Y = -320
+
+turtle.fillcolor('red')
+for rows in range(3):
+    for cols in range(3):
+        turtle.penup()
+        turtle.goto(START_X, START_Y)
+        turtle.pendown()
+        turtle.begin_fill()
+        turtle.circle(RADIUS)
+        turtle.end_fill()
+        START_Y += (RADIUS * 2 + SPACE)
+
+        if turtle.fillcolor() == 'red':
+            turtle.fillcolor('yellow')
+        else:
+            turtle.fillcolor('red')
+
+    START_X += (RADIUS * 2 + SPACE)
+    START_Y = -320
+
+turtle.penup()
+turtle.goto(START_X, START_Y)
+turtle.pendown()
+turtle.fillcolor('yellow')
+turtle.begin_fill()
+turtle.circle(RADIUS)
+turtle.end_fill()
+
+turtle.exitonclick()
