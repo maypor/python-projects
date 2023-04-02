@@ -1,0 +1,53 @@
+#The program receives the number of sides, background color, fill color,
+#speed and displays the shape by using Turtle
+
+import turtle
+import math
+
+
+def input_parameters():
+    bg_color = input('please enter back ground color: ')
+    shape_color = input('please enter shape color: ')
+    speed = int(input('please enter speed- number between 0-10: '))
+    ribs = int(input('please enter number of ribs greater than 2: '))
+    return bg_color, shape_color, speed, ribs
+
+
+# The sine theorem
+def calculate_rib(ribs):
+    rib = (300*math.sin(math.radians(360/ribs)))/(math.sin(math.radians(180-(360/ribs))/2))
+    return rib
+
+
+def only_build(speed, ribs):
+    forward = int(calculate_rib(ribs))
+    angle = 360 / ribs
+    turtle.speed(speed)
+    turtle.penup()
+    turtle.goto(0+(forward/2), 300)
+    turtle.pendown()
+
+    for i in range(ribs):
+        turtle.right(angle)
+        turtle.forward(forward)
+
+
+def shape_building(bg_color, shape_color, speed, ribs):
+    turtle.bgcolor(bg_color)
+    turtle.color(shape_color)
+    turtle.begin_fill()
+    only_build(speed, ribs)
+    turtle.end_fill()
+
+
+def main():
+    bg_color, shape_color, speed, ribs = input_parameters()
+    shape_building(bg_color, shape_color, speed, ribs)
+
+
+main()
+
+# Conditions for the program to appear in python
+print()
+if input('to end the program press 0') == '0':
+    exit()
